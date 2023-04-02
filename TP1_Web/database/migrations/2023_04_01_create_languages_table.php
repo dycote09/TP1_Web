@@ -11,20 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actors', function (Blueprint $table) {
+        Schema::create('languages', function (Blueprint $table) {
             $table->int('id');
-            $table->string('last_name');
-            $table->string('first_name');
-            $table->date('birthdate');
-            $table->timestamps();
+            $table->string('name');
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('actors');
+        Schema::dropIfExists('languages');
     }
 };
