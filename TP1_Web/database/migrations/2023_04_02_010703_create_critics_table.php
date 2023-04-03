@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('critics', function (Blueprint $table) {
-            $table->id('id');
-            $table->id('user_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->id('film_id');
+            $table->unsignedBigInteger('film_id');
             $table->foreign('film_id')->references('id')->on('films');
-            $table->decimal('score');
+            $table->decimal('score',2,1);
             $table->string('comment');        
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
