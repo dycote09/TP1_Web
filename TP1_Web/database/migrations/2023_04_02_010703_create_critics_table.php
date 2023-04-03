@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('critics', function (Blueprint $table) {
-            $table->int('id');
+            $table->id('id');
             $table->int('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->int('film_id');

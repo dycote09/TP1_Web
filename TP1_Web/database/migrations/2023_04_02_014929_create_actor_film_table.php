@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('actor_film', function (Blueprint $table) {
-            $table->int('actor_id');
+            $table->id('actor_id');
             $table->foreign('actor_id')->references('id')->on('actors');
-            $table->int('film_id');
+            $table->id('film_id');
             $table->foreign('film_id')->references('id')->on('films');
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
