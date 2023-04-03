@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('last_name');
             $table->string('first_name');
-            $table->int('role_id');
+            $table->id('role_id');
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('rememberToken');
             $table->timestamp('created_at');

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('critics', function (Blueprint $table) {
             $table->id('id');
-            $table->int('user_id');
+            $table->id('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->int('film_id');
+            $table->id('film_id');
             $table->foreign('film_id')->references('id')->on('films');
             $table->decimal('score');
             $table->string('comment');        

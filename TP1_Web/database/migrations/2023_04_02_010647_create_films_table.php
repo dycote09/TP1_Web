@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id('id');
             $table->string('title');
             $table->string('release_year');
-            $table->int('length');
+            $table->smallInteger('length');
             $table->string('description');
             $table->string('rating');
-            $table->int('language_id');
+            $table->id('language_id');
             $table->foreign('language_id')->references('id')->on('languages');
             $table->string('special_features');
             $table->string('image');
