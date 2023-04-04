@@ -25,12 +25,12 @@ class Film extends Model
 
     public function language()
     {
-        return $this->hasOne('App\Models\Language');
+        return $this->hasOne('Language');
     }
 
     public function critics()
     {
-        return $this->hasMany('App\Models\Critic');
+        return $this->hasMany('Critic');
     }
 
     public function actors()
