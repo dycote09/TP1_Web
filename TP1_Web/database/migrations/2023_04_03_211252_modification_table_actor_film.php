@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('actor_film', function (Blueprint $table) {
-            $table->unsignedBigInteger('actor_id');
-            $table->unsignedBigInteger('film_id');
-            $table->foreign('actor_id')->references('id')->on('actors');
-            $table->foreign('film_id')->references('id')->on('films');
-            $table->timestamp('updated_at');
-            $table->timestamp('created_at');
+        Schema::table('actor_film', function (Blueprint $table) {
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'))->change();
         });
     }
 
