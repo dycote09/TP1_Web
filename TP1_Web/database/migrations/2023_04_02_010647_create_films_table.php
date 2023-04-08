@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('rating');
             $table->unsignedBigInteger('language_id');
-            $table->foreign('language_id')->references('id')->on('languages');
+            $table->foreign('language_id')->references('id')->on('languages')->onUpdate('cascade')->onDelete('cascade');
             $table->string('special_features');
             $table->string('image');
             $table->timestamp('created_at');

@@ -20,10 +20,10 @@ class CriticFactory extends Factory
     {
         $faker = Faker::create();
 
-        return [
-            'id' => $faker->id(),
-            'score' => $faker->score(),
-            'comment' => $faker->comment(),
+        return [            
+            'film_id' => $faker->randomDigitNotZero(), //Testing purposes, multiple critics possible per movie
+            'score' => $faker->numberBetween(1,5), 
+            'comment' => $faker->text(100), 
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //User::factory(5)-> create();
+        User::factory(5)->has(Critic::factory(1))-> create();
         $this->call([
             Actor_filmSeeder::class,
             ActorSeeder::class,

@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('critics', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('film_id');
-            $table->foreign('film_id')->references('id')->on('films');
+            $table->foreign('film_id')->references('id')->on('films')->onUpdate('cascade')->onDelete('cascade');
             $table->decimal('score',2,1);
             $table->string('comment');        
             $table->timestamp('created_at');

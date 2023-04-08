@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('actor_film', function (Blueprint $table) {
             $table->unsignedBigInteger('actor_id');
             $table->unsignedBigInteger('film_id');
-            $table->foreign('actor_id')->references('id')->on('actors');
-            $table->foreign('film_id')->references('id')->on('films');
+            $table->foreign('actor_id')->references('id')->on('actors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('film_id')->references('id')->on('films')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('updated_at');
             $table->timestamp('created_at');
         });
