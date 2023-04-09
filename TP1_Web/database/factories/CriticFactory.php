@@ -7,9 +7,9 @@ use Illuminate\Support\Str;
 use Faker\Factory as Faker;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Critic>
  */
-class UserFactory extends Factory
+class CriticFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,12 +21,9 @@ class UserFactory extends Factory
         $faker = Faker::create();
 
         return [            
-            'password' => $faker->text(8),
-            'email' => $faker->safeEmail(),
-            'last_name' => $faker->lastName(),
-            'first_name' => $faker->firstName(),
-            'role_id' => $faker->numberBetween(1,2),
-            'rememberToken' => Str::random(10),
+            'film_id' => $faker->randomDigitNotZero(), //Testing purposes, multiple critics possible per movie
+            'score' => $faker->numberBetween(1,5), 
+            'comment' => $faker->text(100), 
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -4,6 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+Use App\Models\Actor;
+Use App\Models\Critic;
+Use App\Models\Film;
+Use App\Models\Language;
+Use App\Models\Role;
+Use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory(5)->has(Critic::factory(1))-> create();
+        $this->call([
+            Actor_filmSeeder::class,
+            ActorSeeder::class,
+            FilmSeeder::class,
+            LanguageSeeder::class,
+            RoleSeeder::class,
+        ]);        
     }
 }
