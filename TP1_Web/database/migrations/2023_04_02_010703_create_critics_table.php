@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('score',2,1);
             $table->string('comment');        
             $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable()->default(null);
         });
     }
 

@@ -27,6 +27,8 @@ Route::get('actors/{id}','App\Http\Controllers\ActorController@show');
 //Routes pour films
 Route::get('films','App\Http\Controllers\FilmController@index');
 Route::get('films/{id}','App\Http\Controllers\FilmController@show');
+Route::get('films/search/{keywords?}/{rating?}/{max_length?}','App\Http\Controllers\FilmController@search');
+
 
 
 //Routes pour languages
