@@ -20,8 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Routes pour films
-Route::get('films','App\Http\Controllers\FilmController@index');
-Route::get('films/{id}','App\Http\Controllers\FilmController@show');
+Route::get('films', 'App\Http\Controllers\FilmController@index');
+Route::get('films/{id}', 'App\Http\Controllers\FilmController@show');
+Route::post('films', 'App\Http\Controllers\FilmController@store');
+
 
 //Routes pour actors
 Route::get('actors','App\Http\Controllers\ActorController@index');
