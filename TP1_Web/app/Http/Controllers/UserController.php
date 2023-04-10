@@ -8,9 +8,10 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    //Pas demandé dans le TP, affichage de tous les users
+    //Pas demandé dans le TP, affichage de tous les users -- Now with Views
     public function index(){
-        return UserResource::collection(User::all());
+        $users = User::all();
+        return response()->view('indexusers', ['users' => $users], 200);
     }
 
     //Consultation des informations d’un certain user (seulement si on est connecté avec ce user) -- Présentement ne tient pas compte du role -- À TERMINER

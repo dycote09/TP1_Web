@@ -23,7 +23,7 @@ class Film extends Model
 
     public function language()
     {
-        return $this->hasOne('App\Models\Language');
+        return $this->belongsTo('App\Models\Language');
     }
 
     public function critics()

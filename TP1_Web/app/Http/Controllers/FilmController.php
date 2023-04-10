@@ -10,9 +10,10 @@ use App\Http\Resources\FilmCriticsResource;
 
 class FilmController extends Controller
 {
-    //Consultation des films (sans critiques et sans acteurs) -- Done
+    //Consultation des films (sans critiques et sans acteurs) -- DONE WITH VIEWS
     public function index(){        
-        return FilmResource::collection(Film::all())->response()->setStatusCode(200);
+        $films = Film::all();
+        return response()->view('indexfilms', ['films' => $films], 200);
     }
 
     //Ajout d’un film (seulement si admin) -- Présentement ne vérifie pas si Admin seulement -- À TERMINER
