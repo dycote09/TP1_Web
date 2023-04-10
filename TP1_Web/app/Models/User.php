@@ -20,8 +20,9 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'rememberToken'
-    ];
+        'password',
+        'remember_token',
+    ];    
 
     public function role()
     {

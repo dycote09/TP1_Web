@@ -28,19 +28,19 @@ class FilmController extends Controller
         }
     }
 
-    //Suppression d’un film (seulement si admin)  -- Présentement ne tient pas compte du role + erreur (mais le delete fonctionne...)
+    //Suppression d’un film (seulement si admin)  -- Présentement ne tient pas compte du role + statusCode
     public function destroy($id){        
-            Film::where('id', $id)->delete()->response()->setStatusCode(204);
+            Film::where('id', $id)->delete();
+            //->response()->setStatusCode(204)
     }
 
-    //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore + Need Paginate(20)
-    public function search($keywords = ' ', $rating = 'G', $max_length = 999){
-                
+    //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore
+    public function search($keywords = ' ', $rating = 'G', $max_length = 999){                
         $films = Film::where('title', 'like', '%'.$keywords.'%')
         ->Where('rating', $rating)
         ->Where('length', '<=', $max_length)
         ->orWhere('description', 'like', '%'.$keywords.'%')
-        ->get();
+        ->paginate(20);        
         return FilmResource::collection($films);
     }
 
