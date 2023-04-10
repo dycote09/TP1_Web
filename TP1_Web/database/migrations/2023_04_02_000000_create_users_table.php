@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->default('2');
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('rememberToken')->nullable()->default(null);
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->default(now());
             $table->timestamp('updated_at')->nullable()->default(null);
         });
     }

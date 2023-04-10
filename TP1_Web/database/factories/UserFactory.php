@@ -21,7 +21,7 @@ class UserFactory extends Factory
         $faker = Faker::create();
 
         return [            
-            'password' => $faker->text(8),
+            'password' => $faker->password(8),
             'email' => $faker->safeEmail(),
             'last_name' => $faker->lastName(),
             'first_name' => $faker->firstName(),

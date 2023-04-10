@@ -14,6 +14,6 @@ class Language extends Model
 
     public function films()
     {
-        return $this->belongsToMany('App\Models\Film');
+        return $this->hasMany('App\Models\Film');
     }
 }
