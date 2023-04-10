@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->has(Critic::factory(1))-> create();
         $this->call([
             Actor_filmSeeder::class,
             ActorSeeder::class,
@@ -26,5 +25,6 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             RoleSeeder::class,
         ]);        
+        User::factory(5)->has(Critic::factory(1))-> create();
     }
 }
