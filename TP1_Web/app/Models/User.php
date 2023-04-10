@@ -31,11 +31,7 @@ class User extends Authenticatable
 
     public function critics()
     {
+        $user = auth()->user();
         return $this->hasMany('App\Models\Critic');
     }
-
-    //public function tokens()
-    //{
-    //    return $this->hasMany(PersonalAccessToken::class);
-    //}
 }

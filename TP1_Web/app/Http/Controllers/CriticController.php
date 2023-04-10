@@ -16,9 +16,11 @@ class CriticController extends Controller
         $score = $request->input('score');
         $comment = $request->input('comment');
         $criticBD = $user->critics()->where('film_id', $film_id)->first();
+
         if ($criticBD) {
             return response()->json(['error' => 'Vous avez déjà écrit une critique pour ce film.'], 400)->setStatusCode(400);
         }
+        
         $critic = new Critic();
         $critic->user_id = $user->id;
         $critic->film_id = $film_id;

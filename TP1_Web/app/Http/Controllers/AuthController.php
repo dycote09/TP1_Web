@@ -18,16 +18,6 @@ class AuthController extends Controller
             'first_name'=>'required|string',
         ]);
         
-        //$user = new User();
-        //$user->role_id = $champs['role_id'];
-        //$user->password = $champs['password'];
-        //$user->email = $champs['email'];
-        //$user->last_name = $champs['last_name'];
-        //$user->first_name = $champs['first_name'];
-
-
-        //$user->remeberToken = $champs['rememberToken'];
-        
         $user = User::create([
             'password'=>$champs['password'],
             'email'=>$champs['email'],
@@ -36,6 +26,7 @@ class AuthController extends Controller
         ]);
         
         $token = $user->createToken('token')->plainTextToken;
+        $user->rememberToken = hash('sha256', $token);
         $user->save();
         
         $response= [
@@ -44,5 +35,18 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
+    }
+
+    public function logout(){
+
+        if(auth()->logout()){
+
+            echo('Vous avez été déconnecté avec succès.');
+        }
+        else{
+            echo('Veuillez vous connecter');
+        }
+
+        return redirect('/register');
     }
 }
