@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ActorResource;
 use Illuminate\Http\Request;
 use App\Models\Actor;
-use App\Models\Film;
 
 
 class ActorController extends Controller

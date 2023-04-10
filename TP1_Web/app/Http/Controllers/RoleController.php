@@ -9,12 +9,10 @@ use App\Models\Role;
 class RoleController extends Controller
 {
     public function index(){
-        $roles = Role::all();
-        return RoleResource::collection($roles);
+        return RoleResource::collection(Role::all());
     }
 
     public function show($id){
-        $role = Role::find($id);
-        return new RoleResource($role);
+        return new RoleResource(Role::find($id));
     }
 }
