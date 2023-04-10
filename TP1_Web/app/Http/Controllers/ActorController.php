@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ActorResource;
 use Illuminate\Http\Request;
 use App\Models\Actor;
 
+
 class ActorController extends Controller
 {
+    //Pas demandé dans le TP, affichage de tous les acteurs
     public function index(){
-        $actors = Actor::all();
-        foreach($actors as $actor)
-        {
-            echo($actor->first_name . ' ' . $actor->last_name . '<br>');
-        }
+        return ActorResource::collection(Actor::all())->response()->setStatusCode(200);
     }
 
+    //Consultation de tous les acteurs d’un certain film -- En cours, nécessite un check sur Actor_Film pour correspondance film_id
     public function show($id){
-        $actor = Actor::find($id);
-        echo($actor->first_name . ' ' . $actor->last_name . '<br>');
+        return ActorResource::collection(Actor::all())->response()->setStatusCode(200);
     }
 }
 

@@ -25,7 +25,7 @@ class CriticFactory extends Factory
             'score' => $faker->numberBetween(1,5), 
             'comment' => $faker->text(100), 
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => null,
         ];
     }
 }

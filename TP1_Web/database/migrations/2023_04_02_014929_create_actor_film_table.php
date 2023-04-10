@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('film_id');
             $table->foreign('actor_id')->references('id')->on('actors')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('film_id')->references('id')->on('films')->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamp('updated_at');
             $table->timestamp('created_at');
+            $table->timestamp('updated_at')->nullable()->default(null);
         });
     }
 

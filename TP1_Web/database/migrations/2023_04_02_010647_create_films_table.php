@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('special_features');
             $table->string('image');
             $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable()->default(null);
         });
     }
 

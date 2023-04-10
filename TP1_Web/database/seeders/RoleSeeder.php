@@ -13,8 +13,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $sql = file_get_contents(database_path() . '/seeders/roles.sql');
-
-        DB::statement($sql);
+        $request = "INSERT INTO roles (id, name) VALUES (1, 'Admin'),(2, 'Member');";
+        DB::statement($request);
     }
 }

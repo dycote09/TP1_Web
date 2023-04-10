@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreign('role_id')->references('id')->on('roles');
             $table->string('rememberToken');
             $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable()->default(null);
         });
     }
 

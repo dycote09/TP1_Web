@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'role_id' => $faker->numberBetween(1,2),
             'rememberToken' => Str::random(10),
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => null,
         ];
     }
 }
