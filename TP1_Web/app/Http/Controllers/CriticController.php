@@ -8,7 +8,7 @@ use App\Models\Critic;
 
 class CriticController extends Controller
 {
-    //Ajout d’une critique (seulement si membre connecté) -- DONE, your version seems to work WAY better than what I was doing :D
+    //Ajout d’une critique (seulement si membre connecté) -- Think this works, not sure
     public function store(Request $request)
     {
         $user = $request->user();    

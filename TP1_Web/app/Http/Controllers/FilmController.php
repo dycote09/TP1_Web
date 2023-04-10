@@ -60,17 +60,17 @@ class FilmController extends Controller
         }
     }
 
-
-    //Suppression d’un film (seulement si admin)  -- Présentement ne vérifie pas si Admin seulement -- À TERMINER
-    //public function destroy(Request $request){
-    //    $values = $request->validate([
-    //      'id' => 'required|numeric',
-    //    ]);
-
-    //    if (/*Insert validation admin ici*/) {
-    //       return response()->json(['message' => 'Unauthorized'], 401);
-    //    }
-    //    Film::where('id', $values['id'])->delete();
-    //    return response()->json(['message' => 'Le film a bien été retiré.'], 204)->setStatusCode(204);        
-    //}
+    //Suppression d’un film (seulement si admin)  -- Maybe something like this?
+    public function destroy(Request $request){
+        $values = $request->validate([
+          'id' => 'required|numeric',
+        ]);
+        $user = auth()->user();
+        if (!$user || $user->role_id !== 1) 
+        {
+          return response()->json(['message' => 'Seul un administrateur peut retirer des films de la base de donnée.'], 401);
+        }
+        Film::where('id', $values['id'])->delete();
+        return response()->json(['message' => 'Le film a bien été retiré de la base de données.'], 204);        
+    }
 }

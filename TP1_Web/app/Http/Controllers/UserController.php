@@ -14,15 +14,24 @@ class UserController extends Controller
         return response()->view('indexusers', ['users' => $users], 200);
     }
 
-    //Consultation des informations d’un certain user (seulement si on est connecté avec ce user) -- Présentement ne tient pas compte du role -- À TERMINER
-    //public function show(Request $request){
-    //    $user = User::find($request->input('id'));
-    //    if ($user->Insert authentification here) 
-    //    {
-    //        return new UserResource($user);
-    //    }    
-    //        abort(403, 'Unauthorized action.');
-    //}
+    //Consultation des informations d’un certain user (seulement si on est connecté avec ce user) -- Now with Views -- Think this is more like it, but not sure...
+    public function show(Request $request, $id){
+        $user = User::find($id);
+        if (!$user) 
+        {
+            abort(404, 'L\'utilisateur recherché n\'existe pas.');
+        }
+        if ($request->user() && $request->user()->id === $user->id) 
+        {
+            return response()->view('showuser', compact('user'), 200);
+        } 
+        else 
+        {
+            abort(403, 'Vous devez être connecté à l\'utilisateur désiré avant de pouvoir consulter ses informations.');
+        }          
+    }
+    
+    
 
     //Ajout d’un nouveau user si le email n’existe pas déjà. La création d’un compte ne doit pas connecter l’utilisateur. -- MEH, j'tourne en rond, j'arrête ici pour ce soir.
     public function store(Request $request){
