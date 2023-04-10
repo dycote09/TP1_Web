@@ -32,7 +32,7 @@ class FilmController extends Controller
     //    return (new FilmResource($film))->response()->json(['message' => 'Le film a bien été ajouté.'], 201)->setStatusCode(201);
     //}
 
-    //Consultation d'un certain film avec ses critiques -- Worked by itself, won't work when combined with Keyword Searc   + Recherche de films -- À TERMINER DOESN'T WORK I DON'T UNDERSTAND
+    //Consultation d'un certain film avec ses critiques -- Worked by itself, won't work when combined with Recherche de films -- À TERMINER DOESN'T WORK I DON'T UNDERSTAND
     public function show(Request $request){
         if ($request->has('id'))
         {
