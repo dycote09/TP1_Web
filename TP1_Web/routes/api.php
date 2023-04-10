@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Routes pour actors
 Route::get('actors','App\Http\Controllers\ActorController@index');
-Route::get('actors/{id}','App\Http\Controllers\ActorController@show');
+Route::get('actors/{id}','App\Http\Controllers\ActorController@show'); //Consultation de tous les acteurs d’un certain film -- Deuxième essai, plus ça cela moi.
 
 //Routes pour films
 Route::get('films','App\Http\Controllers\FilmController@index'); //Consultation des films (sans critiques et sans acteurs) -- Done
@@ -29,6 +29,7 @@ Route::post('films','App\Http\Controllers\FilmController@store'); //Ajout d’un
 Route::get('films/{id}','App\Http\Controllers\FilmController@show'); //Consultation d'un certain film avec ses critiques -- Présentement retourne les critiques associées au film_id sans les films - Combiner FilmResource+Critic Resource
 Route::delete('films/{id}','App\Http\Controllers\FilmController@destroy'); //Suppression d’un film (seulement si admin)  -- Présentement ne tient pas compte du role + erreur (mais le delete fonctionne...)
 Route::get('films/search/{keywords?}/{rating?}/{max_length?}','App\Http\Controllers\FilmController@search'); //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore + Need Paginate(20)
+Route::get('films/{id}/actors','App\Http\Controllers\FilmController@show'); //Consultation de tous les acteurs d’un certain film -- Premier essai, fort probablement pas ça.
 
 //Routes pour languages
 Route::get('languages','App\Http\Controllers\LanguageController@index');
