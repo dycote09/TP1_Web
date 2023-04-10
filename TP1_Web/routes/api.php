@@ -19,16 +19,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Routes pour actors
-Route::get('actors','App\Http\Controllers\ActorController@index');
-Route::get('actors/{id}','App\Http\Controllers\ActorController@show');
-
-
-//Routes pour films
+//Route publique
 Route::get('films','App\Http\Controllers\FilmController@index');
 Route::get('films/{id}','App\Http\Controllers\FilmController@show');
-
-
-//Routes pour languages
 Route::get('languages','App\Http\Controllers\LanguageController@index');
+Route::get('actors','App\Http\Controllers\ActorController@index');
+Route::get('actors/{id}','App\Http\Controllers\ActorController@show');
 Route::get('languages/{id}','App\Http\Controllers\LanguageController@show');
+Route::post('register', 'App\Http\Controllers\AuthController@register');
+
+//Route protegé
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('critics', [CriticController::class, 'store']);
+});
+
+Route::middleware('auth:sanctum')->delete('/logout', function (Request $request) {
+    //déconnexion
+});
