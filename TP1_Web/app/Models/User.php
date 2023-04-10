@@ -3,25 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'id',
+        'password',
         'email',
         'last_name',
         'first_name',
-        'role_id',
-        'created_at',
-        'updated_at',
+        'role_id'
     ];
-    
+
     protected $hidden = [
-        'password',
-        'remember_token',
+        'rememberToken'
     ];
 
     public function role()
@@ -33,4 +32,9 @@ class User extends Model
     {
         return $this->hasMany('App\Models\Critic');
     }
+
+    //public function tokens()
+    //{
+    //    return $this->hasMany(PersonalAccessToken::class);
+    //}
 }

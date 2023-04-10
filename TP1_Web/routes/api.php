@@ -19,6 +19,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route publique
+Route::get('films','App\Http\Controllers\FilmController@index');
+Route::get('films/{id}','App\Http\Controllers\FilmController@show');
+Route::get('languages','App\Http\Controllers\LanguageController@index');
+Route::get('actors','App\Http\Controllers\ActorController@index');
+Route::get('actors/{id}','App\Http\Controllers\ActorController@show');
+Route::get('languages/{id}','App\Http\Controllers\LanguageController@show');
+Route::post('register', 'App\Http\Controllers\AuthController@register');
+
+//Route protegé
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('critics', [CriticController::class, 'store']);
+});
+
+Route::middleware('auth:sanctum')->delete('/logout', function (Request $request) {
+    //déconnexion
+});
+
 //Routes pour actors
 Route::get('actors','App\Http\Controllers\ActorController@index'); //Pas demandé dans le TP, affichage de tous les acteurs
 Route::get('actors/{id}','App\Http\Controllers\ActorController@show'); //Consultation de tous les acteurs d’un certain film -- Deuxième essai, plus ça cela moi.
