@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function register(Request $request){
 
         $champs = $request->validate([
-            'role_id'=>'required|int',
+
             'password'=>'required|string',
             'email'=>'required|string',
             'last_name'=>'required|string',
@@ -29,18 +29,15 @@ class AuthController extends Controller
         //$user->remeberToken = $champs['rememberToken'];
         
         $user = User::create([
-            'role_id'=>$champs['role_id'],
             'password'=>$champs['password'],
             'email'=>$champs['email'],
             'last_name'=>$champs['last_name'],
             'first_name'=>$champs['first_name']
         ]);
-        $user->save();
         
         $token = $user->createToken('token')->plainTextToken;
+        $user->save();
         
-        //$user->rememberToken->$token;
-
         $response= [
             'user' => $user,
             'token'=> $token

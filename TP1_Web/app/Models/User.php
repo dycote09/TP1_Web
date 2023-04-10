@@ -16,12 +16,12 @@ class User extends Authenticatable
         'email',
         'last_name',
         'first_name',
-        'role_id'
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'role_id'
     ];    
 
     public function role()
