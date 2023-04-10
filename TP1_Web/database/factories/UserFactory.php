@@ -26,7 +26,7 @@ class UserFactory extends Factory
             'last_name' => $faker->lastName(),
             'first_name' => $faker->firstName(),
             'role_id' => $faker->numberBetween(1,2),
-            'rememberToken' => Str::random(10),
+            'rememberToken' => null,
             'created_at' => now(),
             'updated_at' => null,
         ];
