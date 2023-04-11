@@ -39,14 +39,24 @@ class AuthController extends Controller
 
     public function logout(){
 
-        if(auth()->logout()){
+        auth()->logout();
+        $isLog = auth()->check();
+
+        if(!$isLog){
 
             echo('Vous avez été déconnecté avec succès.');
         }
         else{
-            echo('Veuillez vous connecter');
+            echo('Vous êtes connecté');
         }
-
-        return redirect('/register');
     }
+
+    public function login($id) {
+        $user = User::find($id);
+        auth()->login($user);
+        $name = $user->first_name;
+
+        echo 'Vous êtes connecté avec '. $name;
+    }
+    
 }

@@ -15,8 +15,13 @@ class Authentification
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!auth()->check()){
-            return redirect('/register');
+        $isLog = auth()->check();
+        
+        if($isLog){
+            return redirectTo('/register');
+        }
+        else{
+            echo 'Vous êtes connecté!';
         }
 
         return $next($request);
