@@ -24,8 +24,9 @@ Route::post('register', 'App\Http\Controllers\AuthController@register');
 //Route protegé
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('critics', 'App\Http\Controllers\CriticController@store');
-    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
 });
+
+Route::post('logout', 'App\Http\Controllers\AuthController@logout');
 
 Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
 });

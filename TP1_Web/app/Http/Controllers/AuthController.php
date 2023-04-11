@@ -37,10 +37,31 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
+    public function logout(){
+
+        auth()->logout();
+        $isLog = auth()->check();
+
+        if(!$isLog){
+
+            echo('Vous avez été déconnecté avec succès.');
+        }
+        else{
+            echo('Vous êtes connecté');
+        }
+    }
+
+    public function login($id) {
+        $user = User::find($id);
+        auth()->login($user);
+        $name = $user->first_name;
+
+        echo 'Vous êtes connecté avec '. $name;
+    }
+    
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Déconnexion avec succès.'], 204);
     }
-
 }
