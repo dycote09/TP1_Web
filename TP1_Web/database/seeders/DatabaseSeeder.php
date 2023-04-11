@@ -18,13 +18,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(5)->has(Critic::factory(1))-> create();
         $this->call([
-            Actor_filmSeeder::class,
             ActorSeeder::class,
-            FilmSeeder::class,
             LanguageSeeder::class,
             RoleSeeder::class,
+            FilmSeeder::class,
+            Actor_filmSeeder::class,
         ]);        
+        User::factory(50)->has(Critic::factory(1))-> create();
     }
 }

@@ -19,38 +19,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route publique
-Route::get('films','App\Http\Controllers\FilmController@index');
-Route::get('films/{id}','App\Http\Controllers\FilmController@show');
-Route::get('languages','App\Http\Controllers\LanguageController@index');
-Route::get('actors','App\Http\Controllers\ActorController@index');
-Route::get('actors/{id}','App\Http\Controllers\ActorController@show');
-Route::get('languages/{id}','App\Http\Controllers\LanguageController@show');
 Route::post('register', 'App\Http\Controllers\AuthController@register');
 
 //Route protegé
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::post('critics', [CriticController::class, 'store']);
+    Route::post('critics', 'App\Http\Controllers\CriticController@store');
+    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
 });
 
-Route::middleware('auth:sanctum')->delete('/logout', function (Request $request) {
-    //déconnexion
+Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
 });
 
 //Routes pour actors
 Route::get('actors','App\Http\Controllers\ActorController@index'); //Pas demandé dans le TP, affichage de tous les acteurs
-Route::get('actors/{id}','App\Http\Controllers\ActorController@show'); //Consultation de tous les acteurs d’un certain film -- Deuxième essai, plus ça cela moi.
+Route::get('actors/{id}','App\Http\Controllers\ActorController@show'); //Consultation de tous les acteurs d’un certain film
 
 //Routes pour critics
-Route::post('critics','App\Http\Controllers\CriticController@store'); //Ajout d’une critique (seulement si membre connecté) + Un membre peut seulement écrire une critique par film -- Aucune vérification si membre connecté/une seule critique
+Route::post('critics','App\Http\Controllers\CriticController@store'); //Ajout d’une critique (seulement si membre connecté) -- DONE, your version seems to work WAY better than what I was doing :D
 
 //Routes pour films
 Route::get('films','App\Http\Controllers\FilmController@index'); //Consultation des films (sans critiques et sans acteurs) -- Done
 Route::post('films','App\Http\Controllers\FilmController@store'); //Ajout d’un film (seulement si admin) -- Présentement ne tient pas compte du role + aucune vérification si $request contient toutes les infos nécessaires.
-Route::get('films/{id}','App\Http\Controllers\FilmController@show'); //Consultation d'un certain film avec ses critiques -- Présentement retourne les critiques associées au film_id sans les films - Combiner FilmResource+Critic Resource
+Route::get('films/{id}/critics','App\Http\Controllers\FilmController@show'); //Consultation d'un certain film avec ses critiques -- Done
 Route::delete('films/{id}','App\Http\Controllers\FilmController@destroy'); //Suppression d’un film (seulement si admin)  -- Présentement ne tient pas compte du role + erreur (mais le delete fonctionne...)
-Route::get('films/search/{keywords?}/{rating?}/{max_length?}','App\Http\Controllers\FilmController@search'); //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore + Need Paginate(20)
-Route::get('films/{id}/actors','App\Http\Controllers\FilmController@show'); //Consultation de tous les acteurs d’un certain film -- Premier essai, fort probablement pas ça, voir dans actors.
+Route::get('films/{keywords?}/{rating?}/{max_length?}','App\Http\Controllers\FilmController@show'); //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore + Need Paginate(20)
 
 //Routes pour languages
 Route::get('languages','App\Http\Controllers\LanguageController@index'); //Pas demandé dans le TP, affichage de toutes les langues

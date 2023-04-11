@@ -16,25 +16,22 @@ class User extends Authenticatable
         'email',
         'last_name',
         'first_name',
-        'role_id'
     ];
 
     protected $hidden = [
-        'rememberToken'
-    ];
+        'password',
+        'remember_token',
+        'role_id'
+    ];    
 
     public function role()
     {
-        return $this->hasOne('App\Models\Role');
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function critics()
     {
+        $user = auth()->user();
         return $this->hasMany('App\Models\Critic');
     }
-
-    //public function tokens()
-    //{
-    //    return $this->hasMany(PersonalAccessToken::class);
-    //}
 }

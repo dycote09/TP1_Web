@@ -21,7 +21,7 @@ class CriticFactory extends Factory
         $faker = Faker::create();
 
         return [            
-            'film_id' => $faker->randomDigitNotZero(), //Testing purposes, multiple critics possible per movie
+            'film_id' => $faker->randomDigitNotZero(), //Pour s'assurer que certains films ai plus d'une critique
             'score' => $faker->numberBetween(1,5), 
             'comment' => $faker->text(100), 
             'created_at' => now(),
