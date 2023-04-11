@@ -17,13 +17,10 @@ class Authentification
     {
         $isLog = auth()->check();
         
-        if($isLog){
-            return redirectTo('/register');
-        }
-        else{
-            echo 'Vous êtes connecté!';
+        if(!$isLog){
+            //return redirectTo('/register');
         }
 
-        return $next($request);
+    return $next($request);
     }
 }

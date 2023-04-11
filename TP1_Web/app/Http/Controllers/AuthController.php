@@ -59,4 +59,9 @@ class AuthController extends Controller
         echo 'Vous êtes connecté avec '. $name;
     }
     
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Déconnexion avec succès.'], 204);
+    }
 }
