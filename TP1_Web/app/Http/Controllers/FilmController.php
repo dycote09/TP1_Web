@@ -17,48 +17,57 @@ class FilmController extends Controller
     }
 
     //Ajout d’un film (seulement si admin) -- Présentement ne vérifie pas si Admin seulement -- À TERMINER
-    //public function store(Request $request){
-    //    $values = $request->validate([
-    //        'title' => 'required',
-    //        'description' => 'required',
-    //        'rating' => 'required',
-    //        'length' => 'required|numeric',
-    //    ]);
-
-    //    if (/*Insert validation admin ici*/) {
-    //        return response()->json(['message' => 'Unauthorized'], 401);
-    //    }
-    //    $film = Film::create($values);
-    //    return (new FilmResource($film))->response()->json(['message' => 'Le film a bien été ajouté.'], 201)->setStatusCode(201);
-    //}
-
-    //Consultation d'un certain film avec ses critiques -- Worked by itself, won't work when combined with Recherche de films -- À TERMINER DOESN'T WORK I DON'T UNDERSTAND
-    public function show(Request $request){
-        if ($request->has('id'))
-        {
-            return (new FilmCriticsResource(Film::with('critics')->findOrFail($request->input('id'))))->response()->setStatusCode(200);
-        }
-        else 
-        {
-        $keywords = $request->input('keywords', '');
-        $rating = $request->input('rating', 'G');
-        $max_length = $request->input('max_length', 999);
-        if(!$keywords && $rating == 'G' && $max_length == 999) {
-            $films = Film::paginate(20);
-        }
-        else {
-            $films = Film::where(function($query) use ($keywords) 
-            {
-                $query->where('title', 'like', '%'.$keywords.'%')
-                      ->orWhere('description', 'like', '%'.$keywords.'%');
-            })
-            ->where('rating', $rating)
-            ->where('length', '<=', $max_length)
-            ->paginate(20);  
-        }
-        return FilmResource::collection($films)->response()->setStatusCode(200);
-        }
+    public function store(Request $request){
+        $this->authorize('admin');
+        $values = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'rating' => 'required',
+            'length' => 'required|numeric',
+        ]);
+        $film = Film::create($values);
+        return (new FilmResource($film))->response()->json(['message' => 'Le film a bien été ajouté.'], 201)->setStatusCode(201);
     }
+
+    //Consultation d'un certain film avec ses critiques -- Fuck it je les séparent je suis pas capable de les faire marcher ensembles...
+    public function show(Request $request, $id = null)
+    {        
+            return (new FilmCriticsResource(Film::with('critics')->findOrFail($id)))
+            ->response()
+            ->setStatusCode(200);
+    }
+
+    public function search(Request $request)
+    {
+        $keywords = $request->input('keywords');
+        $rating = $request->input('rating');
+        $max_length = $request->input('max_length');
+        $query = Film::query();
+        if ($keywords !== null) 
+        {
+            $query->where(function ($q) use ($keywords) {
+            $q->where('title', 'like', '%' . $keywords . '%')
+                ->orWhere('description', 'like', '%' . $keywords . '%');
+            });
+        }
+        if ($rating !== null) 
+        {
+            $query->where('rating', $rating);
+        }
+        if ($max_length !== null) 
+        {
+        $query->where('length', '<=', $max_length);
+        }
+        $films = $query->paginate(20);
+        return FilmResource::collection($films)
+        ->response()
+        ->setStatusCode(200);
+    }
+
+
+
+    
+    
 
     //Suppression d’un film (seulement si admin)  -- Maybe something like this?
     public function destroy(Request $request){

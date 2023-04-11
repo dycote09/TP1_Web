@@ -16,9 +16,8 @@ class Authentification
     public function handle(Request $request, Closure $next): Response
     {
         if(!auth()->check()){
-            return redirect('/register');
+            //return redirect('/register');
         }
-
-        return $next($request);
+    return $next($request);
     }
 }

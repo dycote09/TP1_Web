@@ -39,10 +39,13 @@ Route::post('critics','App\Http\Controllers\CriticController@store'); //Ajout d�
 
 //Routes pour films
 Route::get('films','App\Http\Controllers\FilmController@index'); //Consultation des films (sans critiques et sans acteurs) -- Done
-Route::post('films','App\Http\Controllers\FilmController@store'); //Ajout d’un film (seulement si admin) -- Présentement ne tient pas compte du role + aucune vérification si $request contient toutes les infos nécessaires.
+Route::post('films','App\Http\Controllers\FilmController@store')->middleware('auth:sanctum'); //Ajout d’un film -- Think this looks like this...
 Route::get('films/{id}/critics','App\Http\Controllers\FilmController@show'); //Consultation d'un certain film avec ses critiques -- Done
-Route::delete('films/{id}','App\Http\Controllers\FilmController@destroy'); //Suppression d’un film (seulement si admin)  -- Présentement ne tient pas compte du role + erreur (mais le delete fonctionne...)
-Route::get('films/{keywords?}/{rating?}/{max_length?}','App\Http\Controllers\FilmController@show'); //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore + Need Paginate(20)
+Route::get('films/search/{keywords?}/{rating?}/{max_length?}','App\Http\Controllers\FilmController@search'); //Recherche de films - Temporaire, devrais être un @show + plusieurs erreurs encore + Need Paginate(20)
+Route::delete('films/{id}','App\Http\Controllers\FilmController@destroy')->middleware('auth:sanctum'); //Suppression d’un film (seulement si admin)  -- Présentement ne tient pas compte du role + erreur (mais le delete fonctionne...)
+
+//Route pour Home
+Route::get('/', 'App\Http\Controllers\HomeController@index');
 
 //Routes pour languages
 Route::get('languages','App\Http\Controllers\LanguageController@index'); //Pas demandé dans le TP, affichage de toutes les langues
